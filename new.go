@@ -7,18 +7,21 @@ package main
 import (
 	"fmt"
 	"os"
+	"strings"
 	"time"
 )
 
-const usage = `go run new.go "problem name"`
+const usage = `go run new.go "problem_name"`
 
 func main() {
 	if len(os.Args) != 2 {
 		fmt.Println("usage:", usage)
 		os.Exit(1)
 	}
-	path := fmt.Sprintf("%s - %s", time.Now().Format("2006-01-02"), os.Args[1])
-	if err := os.Mkdir(path, 0775); err != nil {
+	date := time.Now().Format("2006-01-02")
+	problemName := strings.Replace(os.Args[1], " ", "_", -1)
+	path := fmt.Sprintf("%s/%s", date, problemName)
+	if err := os.MkdirAll(path, 0775); err != nil {
 		fmt.Println("error:", err)
 		os.Exit(1)
 	}
