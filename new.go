@@ -1,7 +1,9 @@
 // +build ignore
 
-// This package is a helper to create a directory structure for a new dojo
-// session with today's date. Run it with `go run new.go "problem name"`.
+// This is a helper "script" to create a directory structure for a new dojo
+// session with today's date. Run it as:
+//
+//   go run new.go PACKAGE_NAME
 package main
 
 import (
