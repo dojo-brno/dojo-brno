@@ -19,6 +19,9 @@ const usage = `go run new.go PACKAGE_NAME`
 func createDatedPackage(name string) (path string, err error) {
 	date := time.Now().Format("2006-01-02")
 	path = filepath.Join(date, name)
+	if _, err := os.Stat(path); err == nil {
+		return path, fmt.Errorf("path already exists, aborting: %s", path)
+	}
 	return path, os.MkdirAll(path, 0775)
 }
 
