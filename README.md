@@ -72,13 +72,16 @@ script" to create the directory structure for a new session/kata.
 Run it like this:
 
 ```console
-go run new.go fizzbuzz
+go run new.go fizzbuzz 'http://codingdojo.org/cgi-bin/index.pl?KataFizzBuzz'
 ```
 
 Replace `fizzbuzz` with a package name that refers to the kata that will be
 worked on. The top-level directory with the current date will be created
 automatically. Avoid using spaces, dashes, underscores and uppercase letters in
 the name, for it might cause trouble with the Go tooling.
+
+The URL argument is optional, and is used to populate a `README.md` file in the
+new package directory.
 
 
 ### 5. Start `redgreen`
@@ -138,6 +141,9 @@ the end, and share it in the mailing-list in the next day.
 
 After the session is over, add an `AUTHORS` file with the names of the
 participants, for future reference. See the existing files.
+
+We also keep a link to the problem source / description in a `README.md` file
+next to the implementation for reference.
 
 Commit & push the code, so that we can keep track of our history.
 
