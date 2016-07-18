@@ -3,7 +3,7 @@ package pokerhands_test
 import (
 	"testing"
 
-	"github.com/dojo-brno/src/2016-04-27/pokerhands"
+	"github.com/dojo-brno/dojo-brno/2016-04-27/pokerhands"
 )
 
 func TestPokerHandsEqual(t *testing.T) {

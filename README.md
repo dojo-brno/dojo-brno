@@ -23,13 +23,13 @@ This section describes how we usually setup a Coding Dojo session.
 We've been coding in Go most of the time. Follow the [install
 instructions](https://golang.org/doc/install) and make sure to setup the
 `GOPATH` environment variable and clone this repository under
-`$GOPATH/src/github.com/dojo-brno/src`.
+`$GOPATH/src/github.com/dojo-brno/dojo-brno`.
 
 If you have a single path in `GOPATH`, downloading the repository to the
 appropriate location can be achieved by the command:
 
 ```
-go get github.com/dojo-brno/src
+go get github.com/dojo-brno/dojo-brno
 ```
 
 It's also useful to have `$GOPATH/bin` in your `PATH`, so that you can easily
