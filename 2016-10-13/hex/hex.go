@@ -5,7 +5,6 @@ import (
 	"io"
 	"io/ioutil"
 	"os"
-	"strconv"
 )
 
 func ToHex(w io.Writer, r io.Reader) {
@@ -15,7 +14,7 @@ func ToHex(w io.Writer, r io.Reader) {
 	}
 	in, _ := ioutil.ReadAll(r)
 	for _, i := range append(b, in...) {
-		w.Write([]byte(strconv.FormatInt(int64(i), 16)))
+		w.Write([]byte(fmt.Sprintf("%02x", i)))
 	}
 	w.Write([]byte{'\n'})
 }
