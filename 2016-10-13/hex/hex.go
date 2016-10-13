@@ -20,13 +20,5 @@ func ToHex(w io.Writer, r io.Reader) {
 }
 
 func main() {
-	// s := "Hello, world!"
-	s, err := ioutil.ReadAll(os.Stdin)
-	if err != nil {
-		panic(err)
-	}
-	for _, i := range s {
-		fmt.Printf("%02x", i)
-	}
-	fmt.Println()
+	ToHex(os.Stdout, os.Stdin)
 }

@@ -13,10 +13,11 @@ func TestToHex(t *testing.T) {
 	}{
 		{"", ""},
 		{"Hello, world!", "48656c6c6f2c20776f726c6421\n"},
-		// not ready to do this yet...
-		// {"大家好！", "...."},
 		{"Hello", "48656c6c6f\n"},
 		{"Hello\n", "48656c6c6f0a\n"},
+		// not ready to do this yet...
+		// {"Ahoj, světe!", ".."},
+		// {"大家好！", "e5 a4 a7 e5 ae b6 e5 a5 bd ef bc 81\n"},
 	}
 	for _, tt := range tests {
 		var b bytes.Buffer
