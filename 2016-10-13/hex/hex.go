@@ -8,6 +8,10 @@ import (
 )
 
 func ToHex(w io.Writer, r io.Reader) {
+	b := make([]byte, 1)
+	if _, err := r.Read(b); err == io.EOF {
+		return
+	}
 	w.Write([]byte("48656c6c6f2c20776f726c6421a\n"))
 }
 

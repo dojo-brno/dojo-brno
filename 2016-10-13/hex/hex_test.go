@@ -11,6 +11,7 @@ func TestToHex(t *testing.T) {
 		in   string
 		want string
 	}{
+		{"", ""},
 		{"Hello, world!", "48656c6c6f2c20776f726c6421a\n"},
 	}
 	for _, tt := range tests {
