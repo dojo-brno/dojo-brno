@@ -11,7 +11,6 @@ func Roman2Dec(i string) int {
 	if !valid(i) {
 		return -1
 	}
-	unitValue := 1
 	m := map[string]int{
 		"I": 1,
 		"V": 5,
@@ -21,10 +20,17 @@ func Roman2Dec(i string) int {
 		"D": 500,
 		"M": 1000,
 	}
-	unitValue, ok := m[i]
-	if !ok {
-		unitValue = 1
+
+	sum := 0
+	for j := range i {
+		if j < len(i)-1 {
+			if m[i[j:j+1]] < m[i[j+1:j+2]] {
+				sum = sum - m[i[j:j+1]]
+				continue
+			}
+		}
+		sum = sum + m[i[j:j+1]]
 	}
 
-	return len(i) * unitValue
+	return sum
 }
