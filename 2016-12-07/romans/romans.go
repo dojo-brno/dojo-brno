@@ -1,5 +1,9 @@
 package romans
 
+import "errors"
+
+var Invalid = errors.New("not a roman numeral")
+
 func valid(i string) bool {
 	if i == "a" {
 		return false
@@ -7,9 +11,9 @@ func valid(i string) bool {
 	return true
 }
 
-func Roman2Dec(i string) int {
+func ToInt(i string) (int, error) {
 	if !valid(i) {
-		return -1
+		return -1, Invalid
 	}
 	m := map[string]int{
 		"I": 1,
@@ -32,5 +36,5 @@ func Roman2Dec(i string) int {
 		sum = sum + m[i[j:j+1]]
 	}
 
-	return sum
+	return sum, nil
 }
