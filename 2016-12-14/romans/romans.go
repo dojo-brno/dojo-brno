@@ -1,15 +1,12 @@
 package romans
 
-func valid(i string) bool {
-	if i == "a" {
-		return false
-	}
-	return true
-}
+import "errors"
 
-func Roman2Dec(i string) int {
-	if !valid(i) {
-		return -1
+var ErrInvalid = errors.New("invalid roman number")
+
+func ToInt(roman string) (int, error) {
+	if !valid(roman) {
+		return 0, ErrInvalid
 	}
 	m := map[string]int{
 		"I": 1,
@@ -22,15 +19,32 @@ func Roman2Dec(i string) int {
 	}
 
 	sum := 0
-	for j := range i {
-		if j < len(i)-1 {
-			if m[i[j:j+1]] < m[i[j+1:j+2]] {
-				sum = sum - m[i[j:j+1]]
-				continue
-			}
+	for i := range roman[:len(roman)-1] {
+		currDigit := m[roman[i:i+1]]
+		nextDigit := m[roman[i+1:i+2]]
+		sign := 1
+		if currDigit < nextDigit {
+			sign = -1
 		}
-		sum = sum + m[i[j:j+1]]
+		sum += sign * currDigit
 	}
+	currDigit := m[roman[len(roman)-1:]]
+	sum += currDigit
 
-	return sum
+	return sum, nil
+}
+
+func MustToInt(roman string) int {
+	v, err := ToInt(roman)
+	if err != nil {
+		panic(err)
+	}
+	return v
+}
+
+func valid(i string) bool {
+	if i == "" || i == "a" {
+		return false
+	}
+	return true
 }
