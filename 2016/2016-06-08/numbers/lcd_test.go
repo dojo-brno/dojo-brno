@@ -3,7 +3,7 @@ package numbers_test
 import (
 	"testing"
 
-	"github.com/dojo-brno/dojo-brno/2016-06-08/numbers"
+	"github.com/dojo-brno/dojo-brno/2016/2016-06-08/numbers"
 )
 
 

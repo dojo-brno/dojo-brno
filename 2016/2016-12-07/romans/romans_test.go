@@ -3,7 +3,7 @@ package romans_test
 import (
 	"testing"
 
-	"github.com/dojo-brno/dojo-brno/2016-12-07/romans"
+	"github.com/dojo-brno/dojo-brno/2016/2016-12-07/romans"
 )
 
 func TestToIntValidInput(t *testing.T) {

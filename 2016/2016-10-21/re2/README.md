@@ -1,7 +1,7 @@
 # Exercise
 
 We did the exercise of reverse-engineering a binary again, same as on
-[2016-10-19](../../2016-10-19/reverse-engineering/README.md).
+[2016-10-19](../../../2016/2016-10-19/reverse-engineering/README.md).
 
 We wrote a bit more of a `main.c` file, but still incomplete. We realized it is
 gonna take some time, and personally I was lacking a bit of feedback from the

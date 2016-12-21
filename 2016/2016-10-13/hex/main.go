@@ -5,7 +5,7 @@ import (
 	"io"
 	"os"
 
-	"github.com/dojo-brno/dojo-brno/2016-10-13/hex/hex"
+	"github.com/dojo-brno/dojo-brno/2016/2016-10-13/hex/hex"
 )
 
 func main() {
