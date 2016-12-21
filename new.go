@@ -17,7 +17,7 @@ import (
 const usage = `go run new.go PACKAGE_NAME [EXERCISE_URL]`
 
 func createDatedPackage(name string) (path string, err error) {
-	date := time.Now().Format("2006-01-02")
+	date := time.Now().Format("2006/2006-01-02")
 	path = filepath.Join(date, name)
 	if _, err := os.Stat(path); err == nil {
 		return path, fmt.Errorf("path already exists, aborting: %s", path)
