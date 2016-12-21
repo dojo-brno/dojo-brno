@@ -5,35 +5,41 @@ not be considered as a prescription, just a collection of ideas if anyone may
 need them.
 
 
-## 1. Setup programming language environment
+## 1. Setup the environment
 
-We've been coding in Go most of the time. Follow the [install
-instructions](https://golang.org/doc/install) and make sure to setup the
-`GOPATH` environment variable and clone this repository under
-`$GOPATH/src/github.com/dojo-brno/dojo-brno`.
+### Programming language
 
-If you have a single path in `GOPATH`, downloading the repository to the
-appropriate location can be achieved by the command:
+Coding Dojos are language agnostic. Pick your favorite language and make sure
+you have installed its compiler/interpreter and you have a testing framework, if
+the language doesn't come with one.
+
+### Install Go
+
+We've been coding in [Go](https://golang.org) quite often. Follow the
+[installation instructions](https://golang.org/doc/install) for your operating
+system and make sure to setup the `GOPATH` environment variable and [test your installation](https://golang.org/doc/install#testing).
+
+Now you can use the `go` tool to download this repository to the appropriate
+location under your `GOPATH` with this command:
 
 ```
-go get github.com/dojo-brno/dojo-brno
+go get -d github.com/dojo-brno/dojo-brno
 ```
 
-It's also useful to have `$GOPATH/bin` in your `PATH`, so that you can easily
-run installed Go programs.
+The repository can now be found in `$GOPATH/src/github.com/dojo-brno/dojo-brno`.
 
 
-## 2. Install `redgreen`
+### Install redgreen
 
-This step is optional.
+*This step is optional.*
 
 Since we'll be doing TDD, it is helpful to have some form of visual feedback on
 the current state of tests.
 
 We should really be using [dojotimer](https://github.com/juanplopes/dojotimer),
 but for now we've been using the
-[redgreen](https://github.com/rhcarvalho/redgreen) Go program. To install it,
-run:
+[redgreen](https://github.com/rhcarvalho/redgreen) command line program. To
+install it, run:
 
 ```
 go get github.com/rhcarvalho/redgreen
@@ -41,8 +47,16 @@ go get github.com/rhcarvalho/redgreen
 
 Instructions on how we use it will follow in another subsection.
 
+---
 
-## 3. Pick a kata (programming task)
+Note: if you haven't done so when installing Go, add `$GOPATH/bin` to your
+`PATH`, so that you can easily run installed Go programs, like for example
+`redgreen`. See https://golang.org/doc/code.html#GOPATH.
+
+---
+
+
+## 2. Pick a kata (programming task)
 
 While there are many resources out there, we've been mostly working on tasks
 from:
@@ -50,7 +64,7 @@ from:
 * http://codingdojo.org/cgi-bin/index.pl?KataCatalogue
 
 
-## 4. Create working directory
+## 3. Create a working directory
 
 This repository is organized by date and kata name. To help verify that you have
 a working Go environment and facilitate following the convention, there's a "Go
@@ -58,27 +72,27 @@ script" to create the directory structure for a new session/kata.
 
 Run it like this:
 
-```console
+```
 go run new.go fizzbuzz 'http://codingdojo.org/cgi-bin/index.pl?KataFizzBuzz'
 ```
 
 Replace `fizzbuzz` with a package name that refers to the kata that will be
-worked on. The top-level directory with the current date will be created
-automatically. Avoid using spaces, dashes, underscores and uppercase letters in
-the name, for it might cause trouble with the Go tooling.
+worked on. A directory hierarchy based on the current date and the kata name
+will be created for you. Avoid using spaces, dashes, underscores and
+uppercase letters in the name, for it might cause trouble with the Go tooling.
 
 The URL argument is optional, and is used to populate a `README.md` file in the
-new package directory.
+new working directory.
 
 
-## 5. Start `redgreen`
+## 4. Start `redgreen`
 
-This step is optional. It requires `redgreen` to be installed, according to the
-previous instructions.
+*This step is optional and requires `redgreen` to be installed, according to the
+[instructions above](#install-redgreen).*
 
-We use `redgreen` with `tmux` to have two terminal panes, one running
-`redgreen`, and another free for us to do whatever we may need, from running
-tests to consulting documentation with `godoc`.
+We use `redgreen` with [`tmux`](https://tmux.github.io/) to have two terminal
+panes, one running `redgreen`, and another free for us to do whatever we may
+need, from running tests to consulting documentation with `godoc`.
 
 For example, the command bellow will create a new session, turn off the status
 bar (to save space in the screen), split the window horizontally giving 20% of
@@ -95,12 +109,14 @@ To have the red/green state always visible, we set the window to be "Always on
 Top" (on GNOME).
 
 
-## 6. Open your favorite or less favorite editor
+## 5. Open a text editor
 
-You may have your preferred editor in which you're proficient at. Keep in mind
-that not everyone may be able to use it as well as you do, though. For that
-reason, try to keep it simple and use the simplest text editor that may get the
-job done.
+It's time to open your favorite or less favorite editor.
+
+You may have a love relationship with an editor that you use daily and in which
+you feel proficient and comfortable. Please keep in mind that not everyone may
+be able to use it as well as you do, though. For that reason, try to keep it
+simple and use the simplest text editor that may get the job done.
 
 Make sure everybody can easily create and save files, and type in code.
 
@@ -109,14 +125,19 @@ Make sure everybody can easily create and save files, and type in code.
 
 Remember:
 
-* Pair programming with a time-box (5 min)
+* Pair programming with a time-box (we use 5 min)
 * Write a test
-* See the test fail (red)
+* See the test fail (red)  
+  Take a good look at the error message, and make sure you have the output that
+  you expected.
 * Write code to make the test pass, and nothing more (green)
-* Maybe refactor
+* Judiciously refactor  
+  Remember that you start refactoring on green, and should finish again on
+  green. Use baby steps, keep everybody in the loop, don't be afraid to step
+  back if needed.
 * Write another test and see it fail (red)
-* ...
-* At the end of the session, arrange time to do a retrospective. Try to
+* Repeat...
+* Reserve time to do a retrospective at the end of the session. Try to
   understand what went well and what can be improved and how. Discuss topics
   that people are interested in, ask and answer questions, etc.
 
@@ -132,7 +153,12 @@ participants, for future reference. See the existing files.
 We also keep a link to the problem source / description in a `README.md` file
 next to the implementation for reference.
 
-Commit & push the code, so that we can keep track of our history.
+Both files should already exist if you used the [`new.go`
+program](#3-create-a-working-directory).
 
-Send an email with a retrospective review, you may foster further discussion
+Commit & push the code, so that we can keep track of our history. If you don't
+have push access, contact one of the repository maintainers and you can become
+one.
+
+Send an email with a retrospective review. You may foster further discussion
 during the week before the next meeting.
