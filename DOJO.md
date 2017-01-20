@@ -9,11 +9,11 @@ need them.
 
 ### Programming language
 
-Coding Dojos are language agnostic. Pick your favorite language and make sure
+Coding dojos are language agnostic. Pick your favorite language and make sure
 you have installed its compiler/interpreter and you have a testing framework, if
 the language doesn't come with one.
 
-### Install Go
+#### Install Go
 
 We've been coding in [Go](https://golang.org) quite often. Follow the
 [installation instructions](https://golang.org/doc/install) for your operating
@@ -28,17 +28,24 @@ go get -d github.com/dojo-brno/dojo-brno
 
 The repository can now be found in `$GOPATH/src/github.com/dojo-brno/dojo-brno`.
 
+#### Install Python
 
-### Install redgreen
+If you are using Linux or macOS, you already have Python installed.
+For more guidance, follow the official documentation: https://www.python.org/about/gettingstarted/.
 
-*This step is optional.*
+### Tools
 
-Since we'll be doing TDD, it is helpful to have some form of visual feedback on
-the current state of tests.
+We use some tools to help us track test results, time, etc.
 
-We should really be using [dojotimer](https://github.com/juanplopes/dojotimer),
-but for now we've been using the
-[redgreen](https://github.com/rhcarvalho/redgreen) command line program. To
+*All tools are optional.*
+
+#### Install redgreen
+
+Since we practice TDD, it is helpful to have some form of visual feedback on the
+current state of tests.
+
+When not using [dojotimer](https://github.com/juanplopes/dojotimer), we've used
+the [redgreen](https://github.com/rhcarvalho/redgreen) command line program. To
 install it, run:
 
 ```
@@ -55,6 +62,22 @@ Note: if you haven't done so when installing Go, add `$GOPATH/bin` to your
 
 ---
 
+#### Install DojoTimer
+
+DojoTimer is a program created by one of the [Dojo Rio](https://dojorio.org/)
+members. It's the *Swiss Army knife* of coding dojoers.
+
+It is written in C#, and can run on Linux using Mono.
+
+Download a pre-compiled [`dojotimer.exe`](http://www.juanlopes.net/dojotimer/),
+then make sure you have the Mono runtime, the *gtk-sharp2* library, and the
+*Webdings* font.
+
+Run `mono dojotimer.exe`.
+
+DojoTimer can track the time, show red/green status, show tests results, save a
+participant list, automate actions, and even control a physical semaphore
+plugged in a serial port!
 
 ## 2. Pick a kata (programming task)
 
@@ -63,6 +86,8 @@ from:
 
 * http://codingdojo.org/cgi-bin/index.pl?KataCatalogue
 
+Note: if you have problems accessing it (unfortunately, sometimes the server
+is down), you can use the [Way Back Machine](https://web.archive.org/web/http://codingdojo.org/cgi-bin/index.pl?KataCatalogue).
 
 ## 3. Create a working directory
 
@@ -85,10 +110,12 @@ The URL argument is optional, and is used to populate a `README.md` file in the
 new working directory.
 
 
-## 4. Start `redgreen`
+## 4. Start `redgreen` or DojoTimer
 
-*This step is optional and requires `redgreen` to be installed, according to the
-[instructions above](#install-redgreen).*
+*This step is optional and requires `redgreen` or DojoTimer to be installed,
+according to the [instructions above](#tools).*
+
+### `redgreen`
 
 We use `redgreen` with [`tmux`](https://tmux.github.io/) to have two terminal
 panes, one running `redgreen`, and another free for us to do whatever we may
@@ -108,6 +135,10 @@ programing task, so that tests are run correctly.
 To have the red/green state always visible, we set the window to be "Always on
 Top" (on GNOME).
 
+### DojoTimer
+
+Run `dojotimer.exe` (Windows) or `mono dojotimer.exe` (others). Explore the
+buttons in the interface to learn what you can do and to configure DojoTimer.
 
 ## 5. Open a text editor
 
