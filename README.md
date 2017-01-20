@@ -1,17 +1,17 @@
 # Coding Dojo Brno
 
-This repository is the home of the source code produced during the Coding Dojo
-Brno sessions.
+This repository is the home of the source code produced during the [Coding Dojo
+Brno](https://dojo-brno.github.io) sessions.
 
-The code has no value in itself, and it should be considered simply as a log of
-our activities.
+The code here should be considered simply as a log of our activities.
 
+## Facebook Page
 
-## Mailing List
+You can find us at https://www.facebook.com/CodingDojoBrno.
 
-We discuss before and after sessions via a [mailing
-list](https://groups.google.com/forum/#!forum/dojo-brno).
+## Discussion group
 
+We exchange emails through https://groups.google.com/forum/#!forum/dojo-brno.
 
 ## Guide
 
