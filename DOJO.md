@@ -70,10 +70,11 @@ members. It's the *Swiss Army knife* of coding dojoers.
 It is written in C#, and can run on Linux using Mono.
 
 Download a pre-compiled [`dojotimer.exe`](http://www.juanlopes.net/dojotimer/),
-then make sure you have the Mono runtime, the *gtk-sharp2* library, and the
-*Webdings* font.
+then make sure you have the Mono runtime and the *gtk-sharp2* library
+installed.
 
-Run `mono dojotimer.exe`.
+Run `mono dojotimer.exe`, or use a [launcher
+script](https://gist.github.com/rhcarvalho/4ad4f90b6d60b96dc225183e773fbf9e).
 
 DojoTimer can track the time, show red/green status, show tests results, save a
 participant list, automate actions, and even control a physical semaphore
