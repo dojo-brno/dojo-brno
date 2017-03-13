@@ -1,9 +1,17 @@
 package smartvector
 
+
+type Node struct {
+     posMap int
+     value int
+     next *Node
+}
+
 type SmartVector struct {
-	posBitMap uint64
+	posBitMap int
 	value     int
 	next      *SmartVector
+        head      *Node
 }
 
 var _ Vector = (*SmartVector)(nil)
@@ -13,32 +21,38 @@ func (v *SmartVector) New(n int) Vector {
 }
 
 func (v *SmartVector) Set(i, value int) {
-	if v.posBitMap == 0 {
-		v.value = value
-		v.posBitMap = setNthBit(v.posBitMap, i)
-		// v.posBitMap |= uint64(i + 1)
-		return
-	}
+        if v.head == nil {
+           v.head = &Node{i, value, nil}
+        } else {
+           present := false
+           currNode := v.head
+           for ; currNode.next != nil; {
+               if currNode.value == value {
+                  present = true
+                  currNode.posMap = currNode.posMap | i
+                  break
+               }
+               currNode = currNode.next
+           } 
+           if !present {
+           newNode := Node{i, value, nil}
+           currNode.next = &newNode           
+           }
+        }
 
-	curr := v
-	for ; curr.next != nil; curr = curr.next {
-	}
-
-	curr.next = &SmartVector{value: value}
 }
 
 func (v *SmartVector) Get(i int) int {
-	for curr := v; !(curr.posBitMap & uint64(i+1)); curr = curr.next {
-
-	}
-
-	if i == 1 {
-		return v.next.value
-	}
-	if i == 2 {
-		return v.next.next.value
-	}
-	return v.value
+        resultNode := -1       
+        for currNode := v.head ; currNode != nil; {
+            found := (currNode.posMap & i) == i
+            if found {              
+               resultNode = currNode.value
+               break
+            }
+            currNode = currNode.next                   
+        }
+        return resultNode 
 }
 
 func setNthBit(toModify uint64, n int) uint64 {
