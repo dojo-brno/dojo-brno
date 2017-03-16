@@ -2,7 +2,7 @@ package smartvector
 
 
 type Node struct {
-     posMap int
+     posMap uint64
      value int
      next *Node
 }
@@ -21,22 +21,22 @@ func (v *SmartVector) New(n int) Vector {
 }
 
 func (v *SmartVector) Set(i, value int) {
+        var posMap uint64
         if v.head == nil {
-           v.head = &Node{i, value, nil}
+           v.head = &Node{setBitAtPosition(posMap, uint64(i)), value, nil}
         } else {
            present := false
            currNode := v.head
            for ; currNode.next != nil; {
                if currNode.value == value {
                   present = true
-                  currNode.posMap = currNode.posMap | i
+                  currNode.posMap = setBitAtPosition(currNode.posMap, uint64(i))
                   break
                }
                currNode = currNode.next
            } 
            if !present {
-           newNode := Node{i, value, nil}
-           currNode.next = &newNode           
+           currNode.next = &Node{setBitAtPosition(posMap, uint64(i)), value, nil}           
            }
         }
 
@@ -45,7 +45,7 @@ func (v *SmartVector) Set(i, value int) {
 func (v *SmartVector) Get(i int) int {
         resultNode := -1       
         for currNode := v.head ; currNode != nil; {
-            found := (currNode.posMap & i) == i
+            found := checkIfSet(currNode.posMap, uint64(i))
             if found {              
                resultNode = currNode.value
                break
@@ -55,7 +55,11 @@ func (v *SmartVector) Get(i int) int {
         return resultNode 
 }
 
-func setNthBit(toModify uint64, n int) uint64 {
-	// toBitwiseOr :
-	return toModify + 1
+func checkIfSet(bitMap, bitPosition uint64) bool {
+   return (bitMap & (1 << bitPosition)) == (1 << bitPosition)
+}
+
+func setBitAtPosition(bitMap, bitPosition uint64) uint64 {
+   bitMap |= (1 << bitPosition)
+   return bitMap
 }
