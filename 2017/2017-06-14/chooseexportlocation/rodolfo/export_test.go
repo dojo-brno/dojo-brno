@@ -94,7 +94,7 @@ func TestChooseExportLocationError(t *testing.T) {
 	}
 	for _, tt := range tests {
 		locations := tt.locations
-		want := noExportLocationAvailable
+		want := errNoExportLocationAvailable
 		_, err := chooseExportLocation(locations, shareID)
 		if err != want {
 			t.Errorf("chooseExportLocation should %v\nerr = %v, want %v", tt.should, err, want)

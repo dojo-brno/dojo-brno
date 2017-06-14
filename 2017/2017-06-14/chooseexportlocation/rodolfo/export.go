@@ -16,7 +16,7 @@ type ExportLocation struct {
 	Preferred bool
 }
 
-var noExportLocationAvailable = errors.New("no ExportLocation matches the request")
+var errNoExportLocationAvailable = errors.New("no ExportLocation matches the request")
 
 func chooseExportLocation(locations []ExportLocation, shareID string) (ExportLocation, error) {
 	var preferred, others []ExportLocation
@@ -36,5 +36,5 @@ func chooseExportLocation(locations []ExportLocation, shareID string) (ExportLoc
 	for _, location := range others {
 		return location, nil
 	}
-	return ExportLocation{}, noExportLocationAvailable
+	return ExportLocation{}, errNoExportLocationAvailable
 }
