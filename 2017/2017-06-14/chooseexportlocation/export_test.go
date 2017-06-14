@@ -63,9 +63,41 @@ func TestChooseExportLocationSuccess(t *testing.T) {
 }
 
 func TestChooseExportLocationError(t *testing.T) {
-	exportLocations := []ExportLocation{}
 	shareID := "share-id"
-	if _, err := chooseExportLocation(exportLocations, shareID); err != noExportLocationAvailable {
-		t.Errorf("chooseExportLocation(%#v, %#v): err = nil, want %#v", exportLocations, shareID, noExportLocationAvailable)
+	badShareID := "bad-share-id"
+	tests := []struct {
+		should    string // document what behavior is being tested
+		locations []ExportLocation
+	}{
+		{
+			should:    "fail when locations is nil",
+			locations: nil,
+		},
+		{
+			should:    "fail when there are no locations",
+			locations: []ExportLocation{},
+		},
+		{
+			should: "fail when sharedID doesn't match anything",
+			locations: []ExportLocation{
+				{"/tmp", badShareID, false, "id1", false},
+				{"/tmp", badShareID, false, "id2", true},
+			},
+		},
+		{
+			should: "fail when all locations are admin-only",
+			locations: []ExportLocation{
+				{"/tmp", shareID, true, "id1", false},
+				{"/tmp", shareID, true, "id2", false},
+			},
+		},
+	}
+	for _, tt := range tests {
+		locations := tt.locations
+		want := noExportLocationAvailable
+		_, err := chooseExportLocation(locations, shareID)
+		if err != want {
+			t.Errorf("chooseExportLocation should %v\nerr = %v, want %v", tt.should, err, want)
+		}
 	}
 }
