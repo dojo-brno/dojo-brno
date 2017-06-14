@@ -5,14 +5,24 @@ import "testing"
 func TestChooseExportLocationSuccess(t *testing.T) {
 	shareID := "share-id"
 	tests := []struct {
+		should       string // document what behavior is being tested
 		locations    []ExportLocation
 		desiredIndex int // index of locations with the correct result
 	}{
 		{
-			[]ExportLocation{
-				{"/tmp", shareID, false, "123", true},
+			should: "return the first location possible",
+			locations: []ExportLocation{
+				{"/tmp", shareID, false, "id1", true},
 			},
-			0,
+			desiredIndex: 0,
+		},
+		{
+			should: "filter out admin locations",
+			locations: []ExportLocation{
+				{"/tmp", shareID, true, "id1", true},
+				{"/any/path", shareID, false, "id2", true},
+			},
+			desiredIndex: 1,
 		},
 	}
 	for _, tt := range tests {
@@ -23,7 +33,7 @@ func TestChooseExportLocationSuccess(t *testing.T) {
 			t.Errorf("chooseExportLocation(%#v, %#v): err = %#v, want nil", locations, shareID, err)
 		}
 		if got != want {
-			t.Errorf("chooseExportLocation(%#v, %#v) = %#v, want %#v", locations, shareID, got, want)
+			t.Errorf("chooseExportLocation should %v\ngot %#v, want %#v", tt.should, got, want)
 		}
 	}
 }

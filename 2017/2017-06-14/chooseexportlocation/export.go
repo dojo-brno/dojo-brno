@@ -20,6 +20,9 @@ var noExportLocationAvailable = errors.New("no ExportLocation matches the reques
 
 func chooseExportLocation(locations []ExportLocation, shareID string) (ExportLocation, error) {
 	for _, location := range locations {
+		if location.IsAdminOnly {
+			continue
+		}
 		return location, nil
 	}
 	return ExportLocation{}, noExportLocationAvailable
