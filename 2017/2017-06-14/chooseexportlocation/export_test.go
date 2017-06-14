@@ -17,6 +17,14 @@ func TestChooseExportLocationSuccess(t *testing.T) {
 			desiredIndex: 0,
 		},
 		{
+			should: "filter out invalid shareIDs",
+			locations: []ExportLocation{
+				{"/tmp", "a-different-share-id", false, "id1", true},
+				{"/any/path", shareID, false, "id2", true},
+			},
+			desiredIndex: 1,
+		},
+		{
 			should: "filter out admin locations",
 			locations: []ExportLocation{
 				{"/tmp", shareID, true, "id1", true},
