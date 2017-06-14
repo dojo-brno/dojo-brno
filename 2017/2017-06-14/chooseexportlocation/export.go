@@ -19,10 +19,21 @@ type ExportLocation struct {
 var noExportLocationAvailable = errors.New("no ExportLocation matches the request")
 
 func chooseExportLocation(locations []ExportLocation, shareID string) (ExportLocation, error) {
+	var preferred, others []ExportLocation
 	for _, location := range locations {
 		if location.ShareInstanceID != shareID || location.IsAdminOnly {
 			continue
 		}
+		if location.Preferred {
+			preferred = append(preferred, location)
+		} else {
+			others = append(others, location)
+		}
+	}
+	for _, location := range preferred {
+		return location, nil
+	}
+	for _, location := range others {
 		return location, nil
 	}
 	return ExportLocation{}, noExportLocationAvailable

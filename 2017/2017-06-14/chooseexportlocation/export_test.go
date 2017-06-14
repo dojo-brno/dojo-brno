@@ -17,6 +17,13 @@ func TestChooseExportLocationSuccess(t *testing.T) {
 			desiredIndex: 0,
 		},
 		{
+			should: "return a location even if not preferred",
+			locations: []ExportLocation{
+				{"/tmp", shareID, false, "id1", false},
+			},
+			desiredIndex: 0,
+		},
+		{
 			should: "filter out invalid shareIDs",
 			locations: []ExportLocation{
 				{"/tmp", "a-different-share-id", false, "id1", true},
@@ -32,16 +39,25 @@ func TestChooseExportLocationSuccess(t *testing.T) {
 			},
 			desiredIndex: 1,
 		},
+		{
+			should: "prefer preferred locations",
+			locations: []ExportLocation{
+				{"/tmp", shareID, false, "id1", false},
+				{"/any/path", shareID, false, "id2", false},
+				{"/yet/another/path", shareID, false, "id3", true},
+			},
+			desiredIndex: 2,
+		},
 	}
 	for _, tt := range tests {
 		locations := tt.locations
 		want := locations[tt.desiredIndex]
 		got, err := chooseExportLocation(locations, shareID)
 		if err != nil {
-			t.Errorf("chooseExportLocation(%#v, %#v): err = %#v, want nil", locations, shareID, err)
+			t.Errorf("chooseExportLocation should %v\nerr = %v, want nil", tt.should, err)
 		}
 		if got != want {
-			t.Errorf("chooseExportLocation should %v\ngot %#v, want %#v", tt.should, got, want)
+			t.Errorf("chooseExportLocation should %v\ngot %+v, want %+v", tt.should, got, want)
 		}
 	}
 }
