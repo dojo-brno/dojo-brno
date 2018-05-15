@@ -1,0 +1,20 @@
+{
+  "name": "fizzbuzz",
+  "version": "0.0.1",
+  "description": "Coding dojo kata",
+  "main": "index.js",
+  "scripts": {
+    "test": "karma start --reporters clear-screen,dots karma.conf.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "jasmine-core": "^3.1.0",
+    "karma": "^2.0.2",
+    "karma-chrome-launcher": "^2.2.0",
+    "karma-clear-screen-reporter": "^1.0.0",
+    "karma-jasmine": "^1.1.2",
+    "karma-phantomjs-launcher": "^1.0.4",
+    "phantomjs-prebuilt": "^2.1.16"
+  }
+}
