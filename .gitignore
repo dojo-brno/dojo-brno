@@ -4,3 +4,4 @@ __pycache__/
 
 *.out
 *.test
+__venv__
