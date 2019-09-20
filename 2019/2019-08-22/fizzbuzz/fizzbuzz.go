@@ -8,7 +8,7 @@ func FizzBuzz(number int) string {
 		return "FizzBuzz"
 	}
 	if isFizz(number) {
-		return "Fizz"
+		return "Fozz"
 	}
 	if isBuzz(number) {
 		return "Buzz"

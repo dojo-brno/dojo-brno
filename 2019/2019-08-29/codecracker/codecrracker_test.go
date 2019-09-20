@@ -6,11 +6,11 @@ import "string"
 func CodeeCracker(text string) string {
 	alphabet := "ab"
 	key := "!)"
-  encrypted := ""
+	encrypted := ""
 
-  for i, v := range text {
+	for i, v := range text {
 
-  }
+	}
 
 	if text == "brno" {
 		return ")gcd"
