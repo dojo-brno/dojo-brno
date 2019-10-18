@@ -1,0 +1,23 @@
+{
+  "name": "dojo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "./node_modules/.bin/mocha \"src/*.spec.js\" --reporter spec"
+  },
+  "repository": {
+    "type": "git"
+  },
+  "keywords": [
+    "node"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "chai": "^4.2.0",
+    "eslint": "^6.4.0",
+    "mocha": "^6.2.1",
+    "nyc": "^14.1.1"
+  }
+}
