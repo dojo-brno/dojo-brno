@@ -1,9 +1,17 @@
 package smartvector
 
+
+type Node struct {
+     posMap uint64
+     value int
+     next *Node
+}
+
 type SmartVector struct {
-	posBitMap uint64
+	posBitMap int
 	value     int
 	next      *SmartVector
+        head      *Node
 }
 
 var _ Vector = (*SmartVector)(nil)
@@ -13,35 +21,45 @@ func (v *SmartVector) New(n int) Vector {
 }
 
 func (v *SmartVector) Set(i, value int) {
-	if v.posBitMap == 0 {
-		v.value = value
-		v.posBitMap = setNthBit(v.posBitMap, i)
-		// v.posBitMap |= uint64(i + 1)
-		return
-	}
+        var posMap uint64
+        if v.head == nil {
+           v.head = &Node{setBitAtPosition(posMap, uint64(i)), value, nil}
+        } else {
+           present := false
+           currNode := v.head
+           for ; currNode.next != nil; {
+               if currNode.value == value {
+                  present = true
+                  currNode.posMap = setBitAtPosition(currNode.posMap, uint64(i))
+                  break
+               }
+               currNode = currNode.next
+           } 
+           if !present {
+           currNode.next = &Node{setBitAtPosition(posMap, uint64(i)), value, nil}           
+           }
+        }
 
-	curr := v
-	for ; curr.next != nil; curr = curr.next {
-	}
-
-	curr.next = &SmartVector{value: value}
 }
 
 func (v *SmartVector) Get(i int) int {
-	for curr := v; !(curr.posBitMap & uint64(i+1)); curr = curr.next {
-
-	}
-
-	if i == 1 {
-		return v.next.value
-	}
-	if i == 2 {
-		return v.next.next.value
-	}
-	return v.value
+        resultNode := -1       
+        for currNode := v.head ; currNode != nil; {
+            found := checkIfSet(currNode.posMap, uint64(i))
+            if found {              
+               resultNode = currNode.value
+               break
+            }
+            currNode = currNode.next                   
+        }
+        return resultNode 
 }
 
-func setNthBit(toModify uint64, n int) uint64 {
-	// toBitwiseOr :
-	return toModify + 1
+func checkIfSet(bitMap, bitPosition uint64) bool {
+   return (bitMap & (1 << bitPosition)) == (1 << bitPosition)
+}
+
+func setBitAtPosition(bitMap, bitPosition uint64) uint64 {
+   bitMap |= (1 << bitPosition)
+   return bitMap
 }
